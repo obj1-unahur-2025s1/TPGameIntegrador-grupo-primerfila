@@ -1,0 +1,17 @@
+import wollok.game.*
+import config.setup.juego
+
+program SirAmiNoMeMandaNadie {
+  game.title("Sir A-Mi-No-Me-Manda-Nadie")
+  const introMusica = game.sound("nivel.wav")
+  introMusica.play()
+  introMusica.shouldLoop(true)
+  introMusica.volume(0.2)
+  game.height(10)
+  game.cellSize(64)
+  game.width(10)
+  game.boardGround("mapaNivel.png")
+  
+  juego.iniciar()
+  game.start()
+}

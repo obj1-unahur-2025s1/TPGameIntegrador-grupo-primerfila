@@ -1,22 +1,4 @@
-# Nombre del juego (<- borrar y completar)
+Añadir la info de grupos, etc.
+Añadir créditos de sprites, musica.
 
-## Equipo de desarrollo
-
-- Alguien
-- Persona
-- etc.
-
-## Capturas
-
-(agregar)
-
-## Reglas de Juego / Instrucciones
-
-(Escribirlas)
-
-
-## Otros
-
-- Curso/Facultad
-- Versión de wollok
-- Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
+https://www.reddit.com/r/PixelArt/comments/16xs9wq/just_a_simple_peaceful_sunset/ simple sunset - TheFireSwordGod
