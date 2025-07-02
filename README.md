@@ -9,8 +9,8 @@
 
 ## Capturas
 
-![Captura 1]([capturas/2.png])  
-![Captura 2]([capturas/1.png])
+![Captura 1](./capturas/2.png)  
+![Captura 2](./capturas/1.png)
 
 ## Reglas de Juego / Instrucciones
 
