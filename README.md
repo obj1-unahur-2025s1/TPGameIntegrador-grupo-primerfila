@@ -9,9 +9,8 @@
 
 ## Capturas
 
-_(Agregar aquí las imágenes cuando estén disponibles)_  
-![Captura 1]([capturas/captura2.png])  
-![Captura 2]([capturas/captura1.png])
+![Captura 1]([capturas/2.png])  
+![Captura 2]([capturas/1.png])
 
 ## Reglas de Juego / Instrucciones
 
