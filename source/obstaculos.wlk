@@ -20,7 +20,5 @@ class PlataformaAccesible inherits Obstaculo {
 }
 
 class Pared inherits Obstaculo {
-  method image() = "obstaculoTest.png"
-  
   override method esObstaculo() = true
 }
