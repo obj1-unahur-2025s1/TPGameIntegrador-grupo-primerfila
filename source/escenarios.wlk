@@ -86,6 +86,7 @@ object corteReal inherits Escenario {
     game.addVisual(plataforma17)
     
     
+    
     // Obstáculos
     const pared1 = new Pared(x = 5, y = 0)
     const pared2 = new Pared(x = 3, y = 1)
@@ -133,6 +134,7 @@ object corteReal inherits Escenario {
     game.addVisual(pared13)
     game.addVisual(pared14)
     
+    
     // Enemigos
     const enemigo1 = new CaballeroNegro(x = 5, y = 1)
     const enemigo2 = new Mago(x = 0, y = 3)
@@ -156,6 +158,7 @@ object corteReal inherits Escenario {
     game.onTick(500, "tickEnemigo4", { enemigo4.moverAutomatico() })
     game.onTick(500, "tickEnemigo5", { enemigo5.moverAutomatico() })
     game.onTick(500, "tickEnemigo6", { enemigo6.moverAutomatico() })
+    
     
     // Objetos del nivel
     const excalibur = new Excalibur(x = 7, y = 0)

@@ -27,7 +27,7 @@ El personaje puede soportar hasta **3 golpes** antes de perder.
 
 ## Otros
 
-- **Curso:** Programación Orientada a Objetos (POO), Comisión 1
+- **Curso:** Programación Orientada a Objetos (POO), Comisión 1.
 - **Facultad:** Universidad Nacional de Hurlingham (UNAHUR)
 - **Versión de Wollok:** 0.3.1
 

@@ -3,6 +3,7 @@ import wollok.game.*
 import config.*
 import source.*
 import source.escenarios.*
+import source.graficos.*
 
 object jugador {
   var posicion = game.at(0, 0)
@@ -24,6 +25,8 @@ object jugador {
   method vida() = vida
   
   method totalDeObjetos() = inventario.size()
+  
+  method inventario() = inventario
   
   method mover(nuevaPosicion) {
     self.direccionDelJugador(nuevaPosicion)
@@ -93,6 +96,7 @@ object jugador {
       )
       game.sound("obtenerItem.wav").play()
       game.removeVisual(objetoEnMismaPosicion)
+      interfaz.agregarItem(objetoEnMismaPosicion)
     } else {
       self.error("No hay objetos acá.")
     }

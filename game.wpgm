@@ -7,10 +7,10 @@ program SirAmiNoMeMandaNadie {
   introMusica.play()
   introMusica.shouldLoop(true)
   introMusica.volume(0.2)
-  game.height(10)
+  game.height(11)
   game.cellSize(64)
   game.width(10)
-  game.boardGround("mapaNivel.png")
+  game.boardGround("nuevoMapa.png")
   
   juego.iniciar()
   game.start()
