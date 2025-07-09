@@ -6,6 +6,13 @@ import source.graficos.*
 
 object juego {
   var escenarioActual = new CorteReal()
+  var nivelActual = 1
+  
+  method nivelActual() = nivelActual
+  
+  method nivelActual(unNivel) {
+    nivelActual = unNivel
+  }
   
   method detenerEnemigos() {
     game.removeTickEvent("tickEnemigo1")
@@ -28,6 +35,8 @@ object juego {
     controles.configurar()
     game.removeVisual(jugador)
     game.addVisual(jugador)
+    interfaz.mostrarVidas(jugador.vida())
+    // A veces no carga el reinicio de vida por lo que fuerzo esto por las dudas.
   }
   
   method reiniciar() {
@@ -35,7 +44,24 @@ object juego {
     game.clear()
     interfaz.reiniciar()
     jugador.reiniciar()
+    nivelActual = 1
     self.cambiarEscenario(new CorteReal())
     self.iniciar()
+  }
+  
+  method avanzarNivel() {
+    if (nivelActual == 1) {
+      self.nivelActual(2)
+      game.removeVisual(jugador)
+      self.cambiarEscenario(new CalabozoFinal())
+      escenarioActual.iniciar()
+      self.iniciar()
+    } else {
+      self.detenerEnemigos()
+      self.cambiarEscenario(victoria)
+      game.removeVisual(jugador)
+      escenarioActual.iniciar()
+      self.iniciar()
+    }
   }
 }

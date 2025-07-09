@@ -112,6 +112,10 @@ class CorteReal inherits Escenario {
   override method iniciar() {
     game.removeVisual(jugador)
     game.boardGround("nuevoMapa.png")
+    objetosInteractuables.clear()
+    plataformas.clear()
+    game.clear()
+    jugador.reiniciarEn(0, 0)
     
     // Inicializamos las plataformas.
     const plataforma1 = new PlataformaAccesible(x = 4, y = 0)
@@ -211,9 +215,6 @@ class CorteReal inherits Escenario {
     game.addVisual(pared13)
     game.addVisual(pared14)
     
-    
-    
-    
     // Enemigos
     const enemigo1 = new CaballeroNegro(x = 5, y = 1)
     const enemigo2 = new Mago(x = 0, y = 3)
@@ -255,92 +256,83 @@ class CorteReal inherits Escenario {
   }
 }
 
+object fondoCalabozoFinal {
+  method position() = game.at(0, 0)
+  
+  method image() = "grillaMapaFinal.png"
+}
+
+class CalabozoFinal inherits Escenario {
+  override method iniciar() {
+    game.clear()
+    objetosInteractuables.clear()
+    plataformas.clear()
+    game.addVisual(fondoCalabozoFinal)
+    jugador.reiniciarEn(0, 0)
+    
+    // Primero las plataformas
+    const plataforma1 = new PlataformaAccesible(x = 0, y = 9)
+    plataformas.add(plataforma1)
+    game.addVisual(plataforma1)
+    
+    // Los enemigos, hasta 6.
+    const enemigoFinal1 = new Mago(x = 6, y = 8)
+    objetosInteractuables.add(enemigoFinal1)
+    game.addVisual(enemigoFinal1)
+    game.onTick(500, "tickEnemigo1", { enemigoFinal1.moverAutomatico() })
+    
+    // Y los objetos.
+    const excaliburFinal = new Excalibur(x = 1, y = 0)
+    const crestaRealFinal = new CrestaReal(x = 2, y = 0)
+    const mallaFinal = new MallaMithril(x = 3, y = 0)
+    const arcoFinal = new Arco(x = 4, y = 0)
+    const llaveFinal = new Llave(x = 5, y = 0)
+    objetosInteractuables.addAll(
+      [excaliburFinal, crestaRealFinal, mallaFinal, arcoFinal, llaveFinal]
+    )
+    game.addVisual(excaliburFinal)
+    game.addVisual(crestaRealFinal)
+    game.addVisual(mallaFinal)
+    game.addVisual(arcoFinal)
+    game.addVisual(llaveFinal)
+    
+    // La puerta final.
+    const puertaFinal = new Puerta(x = 9, y = 0)
+    objetosInteractuables.add(puertaFinal)
+    game.addVisual(puertaFinal)
+    //El jugador al final así se superpone con todo. :B
+    game.addVisual(jugador)
+  }
+}
+
+object fondoDerrota {
+  method position() = game.at(0, 0)
+  
+  method image() = "derrota.png"
+}
+
 object derrota inherits Escenario {
   override method iniciar() {
     objetosInteractuables = []
     plataformas = []
     game.clear()
-    self.decorarConCalaveras()
-    game.addVisual(TextoDerrota)
+    game.addVisual(fondoDerrota)
     keyboard.r().onPressDo({ menuInicio.iniciar() })
   }
+}
+
+object fondoVictoria {
+  method position() = game.at(0, 0)
   
-  method decorarConCalaveras() {
-    game.addVisual(new Calavera(x = 1, y = 0))
-    game.addVisual(new Calavera(x = 3, y = 0))
-    game.addVisual(new Calavera(x = 5, y = 0))
-    game.addVisual(new Calavera(x = 7, y = 0))
-    game.addVisual(new Calavera(x = 9, y = 0))
-    
-    game.addVisual(new Calavera(x = 0, y = 1))
-    game.addVisual(new Calavera(x = 2, y = 1))
-    game.addVisual(new Calavera(x = 4, y = 1))
-    game.addVisual(new Calavera(x = 6, y = 1))
-    game.addVisual(new Calavera(x = 8, y = 1))
-    
-    game.addVisual(new Calavera(x = 1, y = 9))
-    game.addVisual(new Calavera(x = 3, y = 9))
-    game.addVisual(new Calavera(x = 5, y = 9))
-    game.addVisual(new Calavera(x = 7, y = 9))
-    game.addVisual(new Calavera(x = 9, y = 9))
-    
-    game.addVisual(new Calavera(x = 0, y = 2))
-    game.addVisual(new Calavera(x = 2, y = 2))
-    game.addVisual(new Calavera(x = 4, y = 2))
-    game.addVisual(new Calavera(x = 6, y = 2))
-    game.addVisual(new Calavera(x = 8, y = 2))
-  }
+  method image() = "victoria.png"
 }
 
 object victoria inherits Escenario {
   override method iniciar() {
-    game.clear()
     objetosInteractuables.clear()
     plataformas.clear()
-    self.decorarConCorazones()
-    game.addVisual(TextoVictoria)
+    game.clear()
+    game.addVisual(fondoVictoria)
     keyboard.r().onPressDo({ menuInicio.iniciar() })
   }
-  
-  method decorarConCorazones() {
-    game.addVisual(new Corazon(x = 0, y = 0))
-    game.addVisual(new Corazon(x = 2, y = 0))
-    game.addVisual(new Corazon(x = 4, y = 0))
-    game.addVisual(new Corazon(x = 6, y = 0))
-    game.addVisual(new Corazon(x = 8, y = 0))
-    
-    game.addVisual(new Corazon(x = 1, y = 9))
-    game.addVisual(new Corazon(x = 3, y = 9))
-    game.addVisual(new Corazon(x = 5, y = 9))
-    game.addVisual(new Corazon(x = 7, y = 9))
-    game.addVisual(new Corazon(x = 9, y = 9))
-    
-    game.addVisual(new Corazon(x = 0, y = 1))
-    game.addVisual(new Corazon(x = 0, y = 3))
-    game.addVisual(new Corazon(x = 0, y = 5))
-    game.addVisual(new Corazon(x = 0, y = 7))
-    game.addVisual(new Corazon(x = 0, y = 9))
-    
-    game.addVisual(new Corazon(x = 9, y = 0))
-    game.addVisual(new Corazon(x = 9, y = 2))
-    game.addVisual(new Corazon(x = 9, y = 4))
-    game.addVisual(new Corazon(x = 9, y = 6))
-    game.addVisual(new Corazon(x = 9, y = 8))
-  }
-}
-
-object TextoVictoria {
-  method position() = game.center()
-  
-  method text() = "¡Ganaste!"
-  
-  method textColor() = "00FF00FF"
-}
-
-object TextoDerrota {
-  method position() = game.center()
-  
-  method text() = "¡Derrota!"
-  
-  method textColor() = "FF0000FF"
 }

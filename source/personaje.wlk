@@ -18,7 +18,9 @@ object jugador {
   
   method position() = posicion
   
-  method position(x, y) = game.at(x, y)
+  method position(x, y) {
+    posicion = game.at(x, y)
+  }
   
   method vida(unaVida) {
     vida = unaVida
@@ -82,30 +84,50 @@ object jugador {
   
   method puedeObtener(objeto) = objeto.esObtenible()
   
-  method interactuar(objetoEnMismaPosicion) {
-    if (objetoEnMismaPosicion.esPuerta()) {
-      if (self.totalDeObjetos() == 5) {
-        game.say(self, "¡Tengo todas las reliquias!")
-        juego.detenerEnemigos()
-        juego.cambiarEscenario(victoria)
-        game.removeVisual(self)
-        juego.escenarioActual().iniciar()
-      } else {
-        game.say(self, "Me faltal reliquias.")
-      }
-    }
-    
-    if (self.puedeObtener(objetoEnMismaPosicion)) {
-      inventario.add(objetoEnMismaPosicion)
-      juego.escenarioActual().objetosInteractuables().remove(
-        objetoEnMismaPosicion
-      )
-      game.sound("obtenerItem.wav").play()
-      game.removeVisual(objetoEnMismaPosicion)
-      interfaz.agregarItem(objetoEnMismaPosicion)
+  method interactuarConPuerta() {
+    if (juego.nivelActual() == 1) {
+      game.say(self, "Toco la puerta")
+      self.pasarAlCalabozoFinal()
     } else {
-      self.error("No hay objetos acá.")
+      if (juego.nivelActual() == 2) self.intentarGanar()
     }
+  }
+  
+  method interactuar(objetoEnMismaPosicion) {
+    if ((objetoEnMismaPosicion != null) && objetoEnMismaPosicion.esPuerta()) {
+      self.interactuarConPuerta()
+    } else {
+      if ((objetoEnMismaPosicion != null) && self.puedeObtener(
+          objetoEnMismaPosicion
+        )) self.obtenerObjeto(objetoEnMismaPosicion)
+      else self.error("No hay objetos acá.")
+    }
+  }
+  
+  method pasarAlCalabozoFinal() {
+    game.say(self, "Avanzo al calabozo final...")
+    juego.detenerEnemigos()
+    juego.avanzarNivel()
+  }
+  
+  method intentarGanar() {
+    if (self.totalDeObjetos() == 5) {
+      game.say(self, "¡Tengo todas las reliquias!")
+      juego.detenerEnemigos()
+      juego.cambiarEscenario(victoria)
+      game.removeVisual(self)
+      juego.escenarioActual().iniciar()
+    } else {
+      game.say(self, "Me faltan reliquias.")
+    }
+  }
+  
+  method obtenerObjeto(objeto) {
+    inventario.add(objeto)
+    juego.escenarioActual().objetosInteractuables().remove(objeto)
+    game.sound("obtenerItem.wav").play()
+    game.removeVisual(objeto)
+    interfaz.agregarItem(objeto)
   }
   
   method estaSobrePlataforma() = juego.escenarioActual().plataformas().any(
@@ -156,5 +178,6 @@ object jugador {
     self.position(x, y)
     self.vida(3)
     inventario.clear()
+    interfaz.reiniciar()
   }
 }

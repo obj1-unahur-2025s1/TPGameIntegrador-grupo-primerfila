@@ -21,7 +21,6 @@ object controles {
           jugador.mover(jugador.position().down(1)) }
     )
     
-    
     keyboard.x().onPressDo(
       { jugador.interactuar(jugador.objetoEnMismaPosicion()) }
     )
