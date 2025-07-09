@@ -23,7 +23,8 @@ El personaje puede soportar hasta **3 golpes** antes de perder.
 **Controles**
 
 - Flechas del teclado: Movimiento
-- Tecla `X`: Interactuar
+- Tecla `X`: Interactuar.
+- Tecla `R`: Reinicio.
 
 ## Otros
 

@@ -2,9 +2,10 @@ import wollok.game.*
 import source.personaje.*
 import config.controles.controles
 import source.escenarios.*
+import source.graficos.*
 
 object juego {
-  var escenarioActual = corteReal
+  var escenarioActual = new CorteReal()
   
   method detenerEnemigos() {
     game.removeTickEvent("tickEnemigo1")
@@ -22,7 +23,19 @@ object juego {
   }
   
   method iniciar() {
+    jugador.reiniciarEn(0, 0)
     escenarioActual.iniciar()
     controles.configurar()
+    game.removeVisual(jugador)
+    game.addVisual(jugador)
+  }
+  
+  method reiniciar() {
+    self.detenerEnemigos()
+    game.clear()
+    interfaz.reiniciar()
+    jugador.reiniciar()
+    self.cambiarEscenario(new CorteReal())
+    self.iniciar()
   }
 }

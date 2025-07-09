@@ -18,6 +18,12 @@ object jugador {
   
   method position() = posicion
   
+  method position(x, y) = game.at(x, y)
+  
+  method vida(unaVida) {
+    vida = unaVida
+  }
+  
   method tieneVida() = vida > 0
   
   method tieneArmas() = inventario.size() > 0
@@ -124,6 +130,7 @@ object jugador {
     if (self.hayEnemigo(pos) && self.tieneVida()) {
       game.sound("hit.wav").play()
       vida -= 1
+      interfaz.mostrarVidas(vida)
       if (vida == 0) {
         juego.detenerEnemigos()
         juego.cambiarEscenario(derrota)
@@ -136,4 +143,18 @@ object jugador {
   method enemigoEnMiPosicion() = juego.escenarioActual().enemigos().find(
     { e => e.position().equals(posicion) }
   )
+  
+  method reiniciar() {
+    posicion = game.at(0, 0)
+    vida = 3
+    inventario = []
+    frameActual = 0
+    direccion = "derecha"
+  }
+  
+  method reiniciarEn(x, y) {
+    self.position(x, y)
+    self.vida(3)
+    inventario.clear()
+  }
 }

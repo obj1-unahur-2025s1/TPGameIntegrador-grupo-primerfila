@@ -1,5 +1,5 @@
 import wollok.game.*
-import config.setup.juego
+import source.escenarios.menuInicio
 
 program SirAmiNoMeMandaNadie {
   game.title("Sir A-Mi-No-Me-Manda-Nadie")
@@ -11,7 +11,6 @@ program SirAmiNoMeMandaNadie {
   game.cellSize(64)
   game.width(10)
   game.boardGround("nuevoMapa.png")
-  
-  juego.iniciar()
+  menuInicio.iniciar()
   game.start()
 }

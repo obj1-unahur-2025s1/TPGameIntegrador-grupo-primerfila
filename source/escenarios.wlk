@@ -28,8 +28,91 @@ class Escenario {
   }
 }
 
-object corteReal inherits Escenario {
+object fondoInicio {
+  method position() = game.at(0, 0)
+  
+  method image() = "inicio.png"
+}
+
+object fondoInstrucciones {
+  method position() = game.at(0, 0)
+  
+  method image() = "instrucciones.png"
+}
+
+object instrucciones {
+  method mostrar() {
+    game.clear()
+    game.addVisual(fondoInstrucciones)
+    keyboard.x().onPressDo({ self.volverAlMenu() })
+  }
+  
+  method volverAlMenu() {
+    game.removeVisual(fondoInstrucciones)
+    menuInicio.iniciar()
+  }
+}
+
+object menuInicio {
+  var opcionSeleccionada = 1
+  const opciones = [game.at(3, 2), game.at(3, 4)]
+  const puntero = object {
+    method position() = opciones.get(opcionSeleccionada)
+    
+    method image() = "puntero.png"
+  }
+  const musica = game.sound("intro.wav")
+  
+  method iniciar() {
+    opcionSeleccionada = 0
+    self.mostrar()
+  }
+  
+  method mostrar() {
+    game.clear()
+    game.addVisual(fondoInicio)
+    game.addVisual(puntero)
+    self.configurarControles()
+  }
+  
+  method configurarControles() {
+    keyboard.up().onPressDo({ self.seleccionarArriba() })
+    keyboard.down().onPressDo({ self.seleccionarAbajo() })
+    keyboard.x().onPressDo({ self.confirmar() })
+  }
+  
+  method seleccionarArriba() {
+    opcionSeleccionada = 1
+    game.removeVisual(puntero)
+    game.addVisual(puntero)
+  }
+  
+  method seleccionarAbajo() {
+    opcionSeleccionada = 0
+    game.removeVisual(puntero)
+    game.addVisual(puntero)
+  }
+  
+  method confirmar() {
+    if (opcionSeleccionada == 1) {
+      game.removeVisual(puntero)
+      game.removeVisual(fondoInicio)
+      juego.reiniciar()
+    } else {
+      if (opcionSeleccionada == 0) {
+        game.removeVisual(puntero)
+        game.removeVisual(fondoInicio)
+        instrucciones.mostrar()
+      }
+    }
+  }
+}
+
+class CorteReal inherits Escenario {
   override method iniciar() {
+    game.removeVisual(jugador)
+    game.boardGround("nuevoMapa.png")
+    
     // Inicializamos las plataformas.
     const plataforma1 = new PlataformaAccesible(x = 4, y = 0)
     const plataforma2 = new PlataformaAccesible(x = 6, y = 0)
@@ -48,7 +131,6 @@ object corteReal inherits Escenario {
     const plataforma17 = new PlataformaAccesible(x = 7, y = 8)
     const puerta = new Puerta(x = 9, y = 9)
     objetosInteractuables.add(puerta)
-    
     plataformas.addAll(
       [
         plataforma1,
@@ -68,7 +150,6 @@ object corteReal inherits Escenario {
         plataforma17
       ]
     )
-    
     game.addVisual(plataforma1)
     game.addVisual(plataforma2)
     game.addVisual(plataforma3)
@@ -85,8 +166,6 @@ object corteReal inherits Escenario {
     game.addVisual(plataforma16)
     game.addVisual(plataforma17)
     
-    
-    
     // Obstáculos
     const pared1 = new Pared(x = 5, y = 0)
     const pared2 = new Pared(x = 3, y = 1)
@@ -101,7 +180,6 @@ object corteReal inherits Escenario {
     const pared12 = new Pared(x = 4, y = 8)
     const pared13 = new Pared(x = 8, y = 8)
     const pared14 = new Pared(x = 6, y = 8)
-    
     objetosInteractuables.addAll(
       [
         pared1,
@@ -119,7 +197,6 @@ object corteReal inherits Escenario {
         pared14
       ]
     )
-    
     game.addVisual(pared1)
     game.addVisual(pared2)
     game.addVisual(pared3)
@@ -133,6 +210,8 @@ object corteReal inherits Escenario {
     game.addVisual(pared12)
     game.addVisual(pared13)
     game.addVisual(pared14)
+    
+    
     
     
     // Enemigos
@@ -159,7 +238,6 @@ object corteReal inherits Escenario {
     game.onTick(500, "tickEnemigo5", { enemigo5.moverAutomatico() })
     game.onTick(500, "tickEnemigo6", { enemigo6.moverAutomatico() })
     
-    
     // Objetos del nivel
     const excalibur = new Excalibur(x = 7, y = 0)
     const crestaReal = new CrestaReal(x = 2, y = 1)
@@ -184,6 +262,7 @@ object derrota inherits Escenario {
     game.clear()
     self.decorarConCalaveras()
     game.addVisual(TextoDerrota)
+    keyboard.r().onPressDo({ menuInicio.iniciar() })
   }
   
   method decorarConCalaveras() {
@@ -220,6 +299,7 @@ object victoria inherits Escenario {
     plataformas.clear()
     self.decorarConCorazones()
     game.addVisual(TextoVictoria)
+    keyboard.r().onPressDo({ menuInicio.iniciar() })
   }
   
   method decorarConCorazones() {
