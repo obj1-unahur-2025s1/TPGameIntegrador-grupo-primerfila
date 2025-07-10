@@ -59,7 +59,7 @@ object menuInicio {
   const puntero = object {
     method position() = opciones.get(opcionSeleccionada)
     
-    method imagenPuntero1() = "assets/puntero.png"
+    method image() = "punteroFinal.png"
   }
   const musica = game.sound("intro.wav")
   
@@ -272,8 +272,6 @@ class CalabozoFinal inherits Escenario {
     game.addVisual(fondoCalabozoFinal)
     jugador.reiniciarEn(0, 0)
     
-    
-    
     // Plataformas al inicio.
     const plataforma1 = new PlataformaAccesible(x = 2, y = 0)
     const plataforma2 = new PlataformaAccesible(x = 2, y = 1)
@@ -432,8 +430,6 @@ class CalabozoFinal inherits Escenario {
     game.addVisual(mallaFinal)
     game.addVisual(arcoFinal)
     game.addVisual(llaveFinal)
-    
-    
     
     // Puerta final
     const puertaFinal = new Puerta(x = 8, y = 9)
