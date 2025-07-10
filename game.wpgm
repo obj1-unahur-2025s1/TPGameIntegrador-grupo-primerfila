@@ -2,7 +2,7 @@ import wollok.game.*
 import source.escenarios.menuInicio
 
 program SirAmiNoMeMandaNadie {
-  game.title("Sir A-Mi-No-Me-Manda-Nadie")
+  game.title("Sir-Irreverente")
   const introMusica = game.sound("nivel.wav")
   introMusica.play()
   introMusica.shouldLoop(true)

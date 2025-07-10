@@ -59,7 +59,7 @@ object menuInicio {
   const puntero = object {
     method position() = opciones.get(opcionSeleccionada)
     
-    method image() = "puntero.png"
+    method imagenPuntero1() = "assets/puntero.png"
   }
   const musica = game.sound("intro.wav")
   
