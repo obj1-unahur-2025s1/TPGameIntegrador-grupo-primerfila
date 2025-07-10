@@ -105,6 +105,7 @@ object jugador {
   }
   
   method pasarAlCalabozoFinal() {
+    game.sound("subirEscalera.wav").play()
     game.say(self, "Avanzo al calabozo final...")
     juego.detenerEnemigos()
     juego.avanzarNivel()

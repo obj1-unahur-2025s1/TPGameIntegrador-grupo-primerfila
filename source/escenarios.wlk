@@ -84,12 +84,14 @@ object menuInicio {
   method seleccionarArriba() {
     opcionSeleccionada = 1
     game.removeVisual(puntero)
+    game.sound("seleccion.wav").play()
     game.addVisual(puntero)
   }
   
   method seleccionarAbajo() {
     opcionSeleccionada = 0
     game.removeVisual(puntero)
+    game.sound("seleccion.wav").play()
     game.addVisual(puntero)
   }
   
@@ -116,6 +118,8 @@ class CorteReal inherits Escenario {
     plataformas.clear()
     game.clear()
     jugador.reiniciarEn(0, 0)
+    
+    
     
     // Inicializamos las plataformas.
     const plataforma1 = new PlataformaAccesible(x = 4, y = 0)
@@ -170,6 +174,8 @@ class CorteReal inherits Escenario {
     game.addVisual(plataforma16)
     game.addVisual(plataforma17)
     
+    
+    
     // Obstáculos
     const pared1 = new Pared(x = 5, y = 0)
     const pared2 = new Pared(x = 3, y = 1)
@@ -215,6 +221,8 @@ class CorteReal inherits Escenario {
     game.addVisual(pared13)
     game.addVisual(pared14)
     
+    
+    
     // Enemigos
     const enemigo1 = new CaballeroNegro(x = 5, y = 1)
     const enemigo2 = new Mago(x = 0, y = 3)
@@ -238,6 +246,8 @@ class CorteReal inherits Escenario {
     game.onTick(500, "tickEnemigo4", { enemigo4.moverAutomatico() })
     game.onTick(500, "tickEnemigo5", { enemigo5.moverAutomatico() })
     game.onTick(500, "tickEnemigo6", { enemigo6.moverAutomatico() })
+    
+    
     
     // Objetos del nivel
     const excalibur = new Excalibur(x = 7, y = 0)
@@ -450,6 +460,7 @@ object derrota inherits Escenario {
     plataformas = []
     game.clear()
     game.addVisual(fondoDerrota)
+    game.sound("derrota.wav").play()
     keyboard.r().onPressDo({ menuInicio.iniciar() })
   }
 }
@@ -466,6 +477,7 @@ object victoria inherits Escenario {
     plataformas.clear()
     game.clear()
     game.addVisual(fondoVictoria)
+    game.sound("victoria.wav").play()
     keyboard.r().onPressDo({ menuInicio.iniciar() })
   }
 }
