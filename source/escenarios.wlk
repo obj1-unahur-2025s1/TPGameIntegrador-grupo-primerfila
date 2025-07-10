@@ -119,8 +119,6 @@ class CorteReal inherits Escenario {
     game.clear()
     jugador.reiniciarEn(0, 0)
     
-    
-    
     // Inicializamos las plataformas.
     const plataforma1 = new PlataformaAccesible(x = 4, y = 0)
     const plataforma2 = new PlataformaAccesible(x = 6, y = 0)
@@ -174,8 +172,6 @@ class CorteReal inherits Escenario {
     game.addVisual(plataforma16)
     game.addVisual(plataforma17)
     
-    
-    
     // Obstáculos
     const pared1 = new Pared(x = 5, y = 0)
     const pared2 = new Pared(x = 3, y = 1)
@@ -221,8 +217,6 @@ class CorteReal inherits Escenario {
     game.addVisual(pared13)
     game.addVisual(pared14)
     
-    
-    
     // Enemigos
     const enemigo1 = new CaballeroNegro(x = 5, y = 1)
     const enemigo2 = new Mago(x = 0, y = 3)
@@ -246,8 +240,6 @@ class CorteReal inherits Escenario {
     game.onTick(500, "tickEnemigo4", { enemigo4.moverAutomatico() })
     game.onTick(500, "tickEnemigo5", { enemigo5.moverAutomatico() })
     game.onTick(500, "tickEnemigo6", { enemigo6.moverAutomatico() })
-    
-    
     
     // Objetos del nivel
     const excalibur = new Excalibur(x = 7, y = 0)
@@ -279,6 +271,8 @@ class CalabozoFinal inherits Escenario {
     plataformas.clear()
     game.addVisual(fondoCalabozoFinal)
     jugador.reiniciarEn(0, 0)
+    
+    
     
     // Plataformas al inicio.
     const plataforma1 = new PlataformaAccesible(x = 2, y = 0)
@@ -439,6 +433,8 @@ class CalabozoFinal inherits Escenario {
     game.addVisual(arcoFinal)
     game.addVisual(llaveFinal)
     
+    
+    
     // Puerta final
     const puertaFinal = new Puerta(x = 8, y = 9)
     objetosInteractuables.add(puertaFinal)
@@ -451,7 +447,7 @@ class CalabozoFinal inherits Escenario {
 object fondoDerrota {
   method position() = game.at(0, 0)
   
-  method image() = "derrota.png"
+  method image() = "derrotaEnd.png"
 }
 
 object derrota inherits Escenario {
@@ -468,7 +464,7 @@ object derrota inherits Escenario {
 object fondoVictoria {
   method position() = game.at(0, 0)
   
-  method image() = "victoria.png"
+  method image() = "victoriaEnd.png"
 }
 
 object victoria inherits Escenario {
